@@ -4,31 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz San Valentín ❤️</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: #ffdde1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Botón inicial */
+        #startBtn {
+            font-size: 18px;
+            padding: 15px 25px;
+            background-color: #ff4e50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #startBtn:hover {
+            background-color: #e03e40;
+        }
+
+        /* Contenido oculto */
+        #content {
+            display: none;
+        }
+
+        /* Animación de corazones */
+        .heart-container {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            color: red;
+            font-size: 30px;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Mensaje de amor */
+        #message {
+            font-size: 24px;
+            color: #e60073;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Mensaje de "De Diego" */
+        #fromDiego {
+            font-size: 18px;
+            color: black;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: fadeOut 5s ease-in-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+    </style>
 </head>
 <body>
 
-    <!-- Mensaje Inicial -->
-    <div id="introMessage">De Diego ❤️</div>
+    <button id="startBtn">💖 Presiona aquí 💖</button>
 
-    <!-- Botón para iniciar -->
-    <div id="startScreen">
-        <button id="startBtn">💖 Presiona aquí 💖</button>
+    <div id="content">
+        <div class="heart-container"></div>
+        <p id="message">Te amo Mabel, feliz día de San Valentín! 💕</p>
+        <p id="fromDiego">De Diego 💌</p>
+
+        <!-- Música (YouTube) -->
+        <iframe id="youtubeAudio" width="0" height="0"
+            src="https://www.youtube.com/embed/r3Pr1_v7hsw?autoplay=1&loop=1&playlist=r3Pr1_v7hsw"
+            frameborder="0" allow="autoplay"></iframe>
     </div>
 
-    <!-- Contenido principal oculto al inicio -->
-    <div id="content" style="display: none;">
-        <div class="heart-container">
-            <div class="heart"></div>
-        </div>
-        <p id="message">Te amo, Mabel 💕<br>¡Feliz Día de San Valentín!</p>
-    </div>
+    <script>
+        document.getElementById("startBtn").addEventListener("click", function () {
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("content").style.display = "block";
+            generateHearts();
+        });
 
-    <!-- Video de YouTube para la música -->
-    <iframe id="youtubeAudio" width="0" height="0"
-        src="https://www.youtube.com/embed/r3Pr1_v7hsw?autoplay=1&loop=1&playlist=r3Pr1_v7hsw"
-        frameborder="0" allow="autoplay"></iframe>
+        function generateHearts() {
+            const container = document.querySelector(".heart-container");
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                container.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 5000);
+            }, 500);
+        }
+    </script>
 
-    <script src="script.js"></script>
 </body>
 </html>
