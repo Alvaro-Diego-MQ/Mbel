@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz San Valentín ❤️</title>
     <style>
-        /* Estilos generales */
+        /* Estilos Generales */
         body {
-            background-color: #ffdde1;
+            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
             text-align: center;
-            overflow: hidden;
             font-family: 'Arial', sans-serif;
+            overflow: hidden;
         }
 
-        /* Botón inicial */
+        /* Botón Inicial */
         #startBtn {
-            font-size: 18px;
-            padding: 15px 25px;
-            background-color: #ff4e50;
+            font-size: 20px;
+            padding: 15px 30px;
+            background-color: #ff2e63;
             color: white;
             border: none;
             border-radius: 10px;
@@ -31,19 +31,39 @@
         }
 
         #startBtn:hover {
-            background-color: #e03e40;
+            background-color: #e60050;
         }
 
-        /* Contenido oculto */
+        /* Contenido Oculto */
         #content {
             display: none;
         }
 
-        /* Animación de corazones */
+        /* Corazón grande */
         .heart-container {
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        #heart {
+            font-size: 80px;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animación de Corazones Flotantes */
+        .floating-hearts {
+            position: fixed;
             width: 100%;
-            height: 50vh;
+            height: 100vh;
+            pointer-events: none;
         }
 
         .heart {
@@ -60,18 +80,19 @@
             100% { transform: translateY(-100vh); opacity: 0; }
         }
 
-        /* Mensaje de amor */
+        /* Mensajes */
         #message {
-            font-size: 24px;
-            color: #e60073;
+            font-size: 28px;
+            color: white;
             font-weight: bold;
             margin-top: 20px;
+            text-shadow: 2px 2px 5px black;
         }
 
-        /* Mensaje de "De Diego" */
+        /* Mensaje "De Diego" */
         #fromDiego {
-            font-size: 18px;
-            color: black;
+            font-size: 20px;
+            color: white;
             font-weight: bold;
             margin-top: 15px;
             animation: fadeOut 5s ease-in-out forwards;
@@ -89,7 +110,9 @@
     <button id="startBtn">💖 Presiona aquí 💖</button>
 
     <div id="content">
-        <div class="heart-container"></div>
+        <div class="heart-container">
+            <div id="heart">❤️</div>
+        </div>
         <p id="message">Te amo Mabel, feliz día de San Valentín! 💕</p>
         <p id="fromDiego">De Diego 💌</p>
 
@@ -97,6 +120,9 @@
         <iframe id="youtubeAudio" width="0" height="0"
             src="https://www.youtube.com/embed/r3Pr1_v7hsw?autoplay=1&loop=1&playlist=r3Pr1_v7hsw"
             frameborder="0" allow="autoplay"></iframe>
+        
+        <!-- Contenedor de corazones flotantes -->
+        <div class="floating-hearts"></div>
     </div>
 
     <script>
@@ -107,7 +133,7 @@
         });
 
         function generateHearts() {
-            const container = document.querySelector(".heart-container");
+            const container = document.querySelector(".floating-hearts");
             setInterval(() => {
                 let heart = document.createElement("div");
                 heart.classList.add("heart");
